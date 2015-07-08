@@ -14,7 +14,7 @@ Sub ErzeugeQuelle()
         
         'STRUCT
         sSource = sSource & "STRUCT" & Chr(10)
-        sSource = sSource & Chr(9) & "Watchdog : INT //Kommunikationsüberwachung" & Chr(10)
+        sSource = sSource & Chr(9) & "Watchdog : INT ; //Kommunikationsüberwachung" & Chr(10)
         
         For Each rRow In rRng.Rows
             sSource = sSource & Chr(9) & rRow.Cells(1) & " : " & rRow.Cells(2) & " ; //" & rRow.Cells(4) & Chr(10)
@@ -22,7 +22,7 @@ Sub ErzeugeQuelle()
             Next rCell
         Next rRow
         sSource = sSource & Chr(9) & "Reserve : ARRAY  [2 .. 238 ] OF BYTE ;" & Chr(10)
-        sSource = sSource & "END_STRUCT"
+        sSource = sSource & "END_STRUCT ;" & Chr(10)
         
         'DATA
         sSource = sSource & "BEGIN" & Chr(10)
@@ -35,7 +35,7 @@ Sub ErzeugeQuelle()
         For iReserve = 2 To 238
             sSource = sSource & Chr(9) & "Reserve[" & CStr(iReserve) & "] := B" & Chr(35) & "16" & Chr(35) & "0;" & Chr(10)
         Next iReserve
-        sSource = sSource & "END_DATA_BLOCK" & Chr(10)
+        sSource = sSource & "END_DATA_BLOCK" & Chr(10) & Chr(10)
     Next w
     
     WriteTextFile (sSource)
